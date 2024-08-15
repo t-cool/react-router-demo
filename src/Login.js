@@ -1,7 +1,7 @@
-
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useUser } from './UserContext';
+import { TextField, Button, Container, Typography, Box } from '@mui/material';
 
 export default function Login() {
   const [username, setUsername] = useState('');
@@ -18,31 +18,53 @@ export default function Login() {
   };
 
   return (
-    <div>
-      <h2>ログイン</h2>
-      <form onSubmit={handleSubmit}>
-        <div>
-          <label htmlFor="username">ユーザー名：</label>
-          <input
-            type="text"
+    <Container maxWidth="xs">
+      <Box
+        sx={{
+          marginTop: 8,
+          display: 'flex',
+          flexDirection: 'column',
+          alignItems: 'center',
+        }}
+      >
+        <Typography component="h1" variant="h5">
+          ログイン
+        </Typography>
+        <Box component="form" onSubmit={handleSubmit} sx={{ mt: 1 }}>
+          <TextField
+            margin="normal"
+            required
+            fullWidth
             id="username"
+            label="ユーザー名"
+            name="username"
+            autoComplete="username"
+            autoFocus
             value={username}
             onChange={(e) => setUsername(e.target.value)}
-            required
           />
-        </div>
-        <div>
-          <label htmlFor="password">パスワード：</label>
-          <input
+          <TextField
+            margin="normal"
+            required
+            fullWidth
+            name="password"
+            label="パスワード"
             type="password"
             id="password"
+            autoComplete="current-password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
-            required
           />
-        </div>
-        <button type="submit">ログイン</button>
-      </form>
-    </div>
+          <Button
+            type="submit"
+            fullWidth
+            variant="contained"
+            sx={{ mt: 3, mb: 2 }}
+          >
+            ログイン
+          </Button>
+        </Box>
+      </Box>
+    </Container>
   );
 }
